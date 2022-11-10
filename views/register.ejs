@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>The Dojo Message Board</h1>
+    <hr>
+    <section class="ingreso">
+        <form action="/register" method="post" >
+            <label for="nombre">Nombre: </label><br>
+            <input type="text" name="nombre"><br><br>
+    
+            <label for="comentario">Agregue su post: </label><br>
+            <textarea name="comentario" id="comentario" cols="70" rows="5" placeholder="ingrese comentario"></textarea><br>
+    
+            <button>Post Message</button>
+            
+        </form>
+    </section>
+    
+    <h3><%= mensaje %></h3>
+    <section >
+        <h2>>Post BD</h2>
+        <% for (var x in haymensaje) { %>
+            <div class="respuesta">
+                <h5>Nombre: <%= haymensaje[x].nombre %></h5>
+                <h5>Comentario: <%= haymensaje[x].comentario %> </h5>
+                
+                <% for (var y in haymensaje[x].postcomentario) { %>
+                    <h5>Nombre: <%= haymensaje[x].postcomentario[y].nombre %></h5>
+                <h5>Comentario: <%= haymensaje[x].postcomentario[y].comentario %> </h5>
+                    <% } %>
+                <form action="/msgcoment/<%= haymensaje[x]._id %>" method="post" >
+                    <label for="nombre">Nombre: </label><br>
+                    <input type="text" name="nombre"><br><br>
+            
+                    <label for="comentario">comentario: </label><br>
+                    <textarea name="comentario" id="comentario" cols="70" rows="5" placeholder="ingrese Comentario"></textarea><br>
+            
+                    <button>Post Message</button>
+                    
+                </form>
+                
+            </div>         
+            <% } %>
+    </section>
+
+</body>
+</html>
